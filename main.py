@@ -5,7 +5,7 @@ import getch
 
 
 # PIN_NUM = [2, 3, 4, 17, 27, 22, 10]
-PIN_NUM = [2]
+PIN_NUM = [2, 3, 4]
 
 
 def setupGPIO():
@@ -16,12 +16,13 @@ def setupGPIO():
 
 def interpretation(key):
     print('{}: {:07b}'.format(key.encode('utf-8'), ord(key)))
-    b = bin(ord(key))
+    b = int(ord(key))
 
     for i, pin in enumerate(PIN_NUM):
-        GPIO.output(pin, 1)
+        if (b >> i) & 0b1:
+            GPIO.output(pin, 1)
     
-    time.sleep(10)
+    time.sleep(0.01)
 
     for pin in PIN_NUM:
         GPIO.output(pin, 0)
