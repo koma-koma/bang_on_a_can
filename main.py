@@ -15,6 +15,7 @@ def setupGPIO():
 
 
 def interpretation(key):
+    # 8bit以下だけ通すようにしたい
     print('{}: {:07b}'.format(key.encode('utf-8'), ord(key)))
     b = int(ord(key))
 
@@ -27,14 +28,24 @@ def interpretation(key):
     for pin in PIN_NUM:
         GPIO.output(pin, 0)
 
+def main():
+    # input()を利用
+            print('please enter characters')
+            keys = input()
+            for key in keys:
+                interpretation(key)
+                time.sleep(0.1)
+
+def main2():
+    # 押したキーにすぐ反応ver
+        key = getch.getch()
+        interpretation(key)
 
 if __name__ == '__main__':
     setupGPIO()
     try:
         while True:
-            key = getch.getch()
-            # 8bit以下だけ通すようにする
-            interpretation(key)
+            main()
     except KeyboardInterrupt:
         GPIO.cleanup()
         print('end')
