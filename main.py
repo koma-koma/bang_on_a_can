@@ -2,8 +2,12 @@ import RPi.GPIO as GPIO
 import getch
 
 
+PIN_NUM = [2, 3, 4]
+
 def setupGPIO():
-    pass
+    GPIO.setmode(GPIO.BCM)
+    for n in PIN_NUM:
+        GPIO.setup(n,GPIO.OUT)
 
 
 def interpretation(key):
@@ -11,9 +15,13 @@ def interpretation(key):
 
 
 if __name__ == '__main__':
-    while True:
-        try:
+    setupGPIO()
+    try:
+        while True:
             key = getch.getch()
+            # 8bit以下だけ通すようにする
             interpretation(key)
-        except:
-            pass
+    except KeyboardInterrupt:
+            GPIO.cleanup()
+            print('end')
+            
