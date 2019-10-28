@@ -2,7 +2,7 @@
 
 const int bangpin =  9;      // the number of the LED pin
 const int sndSWpin = 8;      // the number of the sound switch pin
-const int bps = 10;
+const int bps = 12;
 float deltime = 1000 / bps;
 int sendByte = 0;         // incoming serial byte
 
@@ -32,7 +32,7 @@ void sendBang(int sendByte) {
 }
 
 void readBit() {
-  Serial.println(!t);
+//  Serial.write(!t);
   val += (!t << count);
   count++;
   t = 1;
@@ -43,7 +43,7 @@ void readBit() {
 }
 
 int receiveBang() {
-  Serial.println("start");
+//  Serial.println("start");
   count = 0;
   val = 0;
   bReading = 1;
@@ -82,7 +82,7 @@ void loop() {
   if (!sndSWstate && !bReading) {
     int inByte = receiveBang();
     Serial.write(inByte);
-    Serial.println("");
+//    Serial.println("");
   }
   
   if (Serial.available() > 0) {
