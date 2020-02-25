@@ -1,0 +1,6 @@
+#N canvas 339 297 95 99 12;
+#X obj 14 13 loadbang;
+#X obj 14 61 s bps;
+#X msg 14 37 12;
+#X connect 0 0 2 0;
+#X connect 2 0 1 0;
