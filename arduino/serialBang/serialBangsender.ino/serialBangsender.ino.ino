@@ -1,5 +1,5 @@
-const int bangpin =  9;      // the number of the LED pin
-const int bps = 12;
+const int bangpin =  13;      // the number of the LED pin
+const int bps = 10;  // 12か10
 float deltime = 1000 / bps;
 int sendByte = 0;         // incoming serial byte
 
